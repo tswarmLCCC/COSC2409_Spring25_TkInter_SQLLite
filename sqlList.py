@@ -59,5 +59,17 @@ def show_students_column(colNum):
         except sqlite3.Error as e:
             print("Error", f"Failed to retrieve tables.\nError: {e}")
 
+def show_all_students():
+    global connection
+    if connection:
+        cursor = connection.cursor()
+        try:
+            cursor.execute("SELECT * FROM student")
+            students = cursor.fetchall()
+            for student in students:
+                print(student)
+        except sqlite3.Error as e:
+            print("Error", f"Failed to retrieve students.\nError: {e}")
 connect_database()
 show_students_column(2)
+show_all_students()
